@@ -1,0 +1,35 @@
+{
+  "name": "colormin",
+  "version": "0.0.0",
+  "description": "Turn a CSS color into its smallest representation.",
+  "main": "index.js",
+  "homepage": "https://github.com/ben-eb/colormin",
+  "scripts": {
+    "test": "tape test.js"
+  },
+  "keywords": [
+    "color",
+    "colors",
+    "compression",
+    "css",
+    "minify"
+  ],
+  "author": {
+    "name": "Ben Briggs",
+    "email": "therealbenbriggs@hotmail.com",
+    "url": "http://beneb.info"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "color": "^0.7.3",
+    "color-string": "ben-eb/color-string#fix-transparency",
+    "css-color-names": "0.0.1"
+  },
+  "devDependencies": {
+    "tape": "^3.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ben-eb/colormin.git"
+  }
+}
