@@ -2,13 +2,17 @@
 
 var colourNames = require('./lib/colourNames');
 var toShorthand = require('./lib/toShorthand');
-var stripWhitespace = require('./lib/stripWhitespace');
-var trimLeadingZero = require('./lib/trimLeadingZero');
+var trim = require('./lib/stripWhitespace');
+var zero = require('./lib/trimLeadingZero');
 var ctype = require('./lib/colourType');
 var color = require('color');
 
 function filterColours (callback) {
     return Object.keys(colourNames).filter(callback);
+}
+
+function longer (a, b) {
+    return (a && a.length < b.length ? a : b).toLowerCase();
 }
 
 function colormin (colour) {
@@ -24,7 +28,7 @@ function colormin (colour) {
             }
             var hsla = c.hslaString();
             var rgba = c.rgbString();
-            return trimLeadingZero(stripWhitespace(hsla.length < rgba.length ? hsla : rgba));
+            return zero(trim(hsla.length < rgba.length ? hsla : rgba));
         }
     }
     if (ctype.isHex(colour)) {
@@ -32,12 +36,12 @@ function colormin (colour) {
         var keyword = filterColours(function (key) {
             return colourNames[key] === colour;
         })[0];
-        return (keyword && keyword.length < colour.length ? keyword : colour).toLowerCase();
+        return longer(keyword, colour);
     } else if (ctype.isKeyword(colour)) {
         var hex = colourNames[filterColours(function (key) {
             return key === colour.toLowerCase();
         })[0]];
-        return (hex && hex.length < colour.length ? hex : colour).toLowerCase();
+        return longer(hex, colour);
     }
     // Possibly malformed, just pass through
     return colour;
