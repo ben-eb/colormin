@@ -21,8 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "color": "^0.7.3",
-    "color-string": "ben-eb/color-string#fix-transparency",
+    "color": "^0.8.0",
     "css-color-names": "0.0.1"
   },
   "devDependencies": {
