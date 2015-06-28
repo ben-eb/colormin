@@ -16,19 +16,16 @@
   ],
   "author": {
     "name": "Ben Briggs",
-    "email": "therealbenbriggs@hotmail.com",
+    "email": "beneb.info@gmail.com",
     "url": "http://beneb.info"
   },
   "license": "MIT",
   "dependencies": {
-    "color": "^0.8.0",
+    "color": "^0.9.0",
     "css-color-names": "0.0.1"
   },
   "devDependencies": {
-    "tape": "^3.5.0"
+    "tape": "^4.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/ben-eb/colormin.git"
-  }
+  "repository": "ben-eb/colormin"
 }

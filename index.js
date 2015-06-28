@@ -11,7 +11,7 @@ function filterColours (callback) {
     return Object.keys(colourNames).filter(callback);
 }
 
-function longer (a, b) {
+function shorter (a, b) {
     return (a && a.length < b.length ? a : b).toLowerCase();
 }
 
@@ -36,12 +36,12 @@ function colormin (colour) {
         var keyword = filterColours(function (key) {
             return colourNames[key] === colour;
         })[0];
-        return longer(keyword, colour);
+        return shorter(keyword, colour);
     } else if (ctype.isKeyword(colour)) {
         var hex = colourNames[filterColours(function (key) {
             return key === colour.toLowerCase();
         })[0]];
-        return longer(hex, colour);
+        return shorter(hex, colour);
     }
     // Possibly malformed, just pass through
     return colour;

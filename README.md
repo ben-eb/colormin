@@ -2,7 +2,9 @@
 
 > Turn a CSS color into its smallest representation.
 
-Install via [npm](https://npmjs.org/package/colormin):
+## Install
+
+With [npm](https://npmjs.org/package/colormin) do:
 
 ```
 npm install colormin --save
@@ -28,7 +30,7 @@ to cover it.
 
 ## License
 
-MIT © Ben Briggs
+MIT © [Ben Briggs](http://beneb.info)
 
 [ci]:   https://travis-ci.org/ben-eb/colormin
 [deps]: https://gemnasium.com/ben-eb/colormin
