@@ -27,14 +27,14 @@
   },
   "license": "MIT",
   "dependencies": {
-    "color": "^0.9.0",
+    "color": "^0.10.1",
     "css-color-names": "0.0.1"
   },
   "devDependencies": {
     "babel": "^5.8.20",
     "babel-tape-runner": "^1.1.0",
     "faucet": "0.0.1",
-    "tape": "^4.0.0"
+    "tape": "^4.0.1"
   },
   "repository": "ben-eb/colormin"
 }
