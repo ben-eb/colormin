@@ -1,6 +1,6 @@
 {
   "name": "colormin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Turn a CSS color into its smallest representation.",
   "main": "dist/index.js",
   "files": [
