@@ -1,9 +1,9 @@
 'use strict';
 
-var test = require('tape');
-var min = require('./');
+import test from 'tape';
+import min from '..';
 
-test('should return the smallest colour', function (t) {
+test('should return the smallest colour', t => {
     t.plan(19);
     t.equal(min('RED'), 'red', 'should lowercase keywords');
     t.equal(min('#f00'), 'red', 'should convert shorthand hex to keyword');
@@ -14,7 +14,7 @@ test('should return the smallest colour', function (t) {
     t.equal(min('hsla(0, 100%, 50%, 1)'), 'red', 'should convert fully oqaque hsl to keyword');
     t.equal(min('hsla(0, 100%, 50%, .5)'), 'rgba(255,0,0,.5)', 'should convert translucent hsla to rgba');
     t.equal(min('#FFFFFF'), '#fff', 'should convert longhand hex to shorthand, case insensitive');
-    t.equal(min('WHiTE'), '#fff', 'should convert keyword to hex, case insensitive')
+    t.equal(min('WHiTE'), '#fff', 'should convert keyword to hex, case insensitive');
     t.equal(min('yellow'), '#ff0', 'should convert keyword to hex');
     t.equal(min('rgb(12, 134, 29)'), '#0c861d', 'should convert rgb to hex');
     t.equal(min('hsl(230, 50%, 40%)'), '#349', 'should convert hsl to hex');
@@ -26,7 +26,7 @@ test('should return the smallest colour', function (t) {
     t.equal(min('transparent'), 'transparent', 'should leave transparent as it is');
 });
 
-test('should pass through if not recognised', function (t) {
+test('should pass through if not recognised', t => {
     t.plan(1);
     t.equal(min('Unrecognised'), 'Unrecognised');
 });
