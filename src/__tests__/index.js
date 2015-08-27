@@ -27,6 +27,7 @@ test('should return the smallest colour', t => {
 });
 
 test('should pass through if not recognised', t => {
-    t.plan(1);
+    t.plan(2);
     t.equal(min('Unrecognised'), 'Unrecognised');
+    t.equal(min('inherit'), 'inherit');
 });
