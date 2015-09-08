@@ -1,3 +1,6 @@
 'use strict';
 
-export default str => str.replace(/([^\d])0(\.\d*)/g, '$1$2');
+export default num => {
+    let zero = num.toString();
+    return zero[0] === '0' && zero[1] === '.' ? zero.slice(1) : zero;
+}

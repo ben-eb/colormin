@@ -27,8 +27,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "color": "^0.10.1",
-    "css-color-names": "0.0.1"
+    "color-convert": "^0.6.0",
+    "css-color-names": "0.0.2"
   },
   "devDependencies": {
     "babel": "^5.8.20",
