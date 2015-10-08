@@ -14,3 +14,11 @@ export function toLonghand (hex) {
     let b = h[2];
     return h.length === 3 && '#' + r + r + g + g + b + b || hex;
 };
+
+export function is (hex) {
+    if (hex[0] === '#') {
+        let c = toLonghand(hex).substring(1);
+        return c.length === 6 && !isNaN(parseInt(c, 16));
+    }
+    return false;
+}

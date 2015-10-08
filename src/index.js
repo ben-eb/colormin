@@ -3,7 +3,7 @@
 import convert from 'colr-convert';
 import keywords from 'css-color-names';
 import dropLeadingZero from './lib/drop-leading-zero';
-import {toShorthand, toLonghand} from './lib/hex';
+import {is as isHex, toShorthand, toLonghand} from './lib/hex';
 let hexes = {};
 let round = Math.round;
 
@@ -67,19 +67,19 @@ export default function (name, args) {
             hsla[2] = hsla[2] + '%';
             return shorter('hsla(' + hsla.join() + ')', 'rgba(' + rgba.join() + ')');
         }
-    } else if (word[0] === '#' && word.length === 4) {
+    }
+
+    if (isHex(word)) {
         word = toLonghand(word);
+        if (word in hexes) {
+            return shorter(toShorthand(word), hexes[word]);
+        }
+        return toShorthand(word);
     }
 
-    if (word in hexes) {
-        word = shorter(toShorthand(word), hexes[word]);
-    } else if (word in keywords) {
-        word = shorter(word, toShorthand(keywords[word]));
-    } else if (word[0] === '#' && word.length === 7) {
-        word = toShorthand(word);
-    } else {
-        return name;
+    if (word in keywords) {
+        return shorter(word, toShorthand(keywords[word]));
     }
 
-    return word;
+    return name;
 };
