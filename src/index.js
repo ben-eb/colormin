@@ -1,39 +1,85 @@
 'use strict';
 
-import colourNames from './lib/colourNames';
-import toShorthand from './lib/toShorthand';
-import * as ctype from './lib/colourType';
-import color from 'color';
-import trim from './lib/stripWhitespace';
-import zero from './lib/trimLeadingZero';
+import convert from 'colr-convert';
+import keywords from 'css-color-names';
+import dropLeadingZero from './lib/drop-leading-zero';
+import {toShorthand, toLonghand} from './lib/hex';
+let hexes = {};
+let round = Math.round;
 
-let filterColor = callback => Object.keys(colourNames).filter(callback);
-let shorter = (a, b) => (a && a.length < b.length ? a : b).toLowerCase();
+Object.keys(keywords).forEach(function (keyword) {
+    hexes[keywords[keyword]] = keyword;
+});
 
-export default colour => {
-    if (ctype.isRGBorHSL(colour)) {
-        let c = color(colour);
-        if (c.alpha() === 1) {
-            // At full alpha, just use hex
-            colour = c.hexString();
-        } else {
-            let rgb = c.rgb();
-            if (!rgb.r && !rgb.g && !rgb.b && !rgb.a) {
-                return 'transparent';
-            }
-            let hsla = c.hslaString();
-            let rgba = c.rgbString();
-            return zero(trim(hsla.length < rgba.length ? hsla : rgba));
+let shorter = (a, b) => (a && a.length < b.length ? a : b);
+
+export default function (name, args) {
+    var word = name.toLowerCase();
+    if (word === 'rgb' || word === 'rgba' || word === 'hsl' || word === 'hsla') {
+        if (!Array.isArray(args)) {
+            throw Error('colormin: unexpected `' + word + '` function arguments');
         }
+        if (args.length > 2) {
+            args[0] = parseInt(args[0], 10);
+            args[1] = parseInt(args[1], 10);
+            args[2] = parseInt(args[2], 10);
+            if (args.length > 3) {
+                args[3] = parseFloat(args[3]);
+            }
+        }
+        if (word === 'rgba' || word === 'hsla') {
+            if (args[3] === 0) {
+                return'transparent';
+            } else if (args[3] === 1) {
+                word = word.slice(0, 3);
+            } else {
+                args[3] = dropLeadingZero(args[3]);
+            }
+        }
+        if (word === 'hsl') {
+            word = 'rgb';
+            args = convert.hsl.rgb(args);
+            args[0] = round(args[0]);
+            args[1] = round(args[1]);
+            args[2] = round(args[2]);
+        }
+        if (word === 'rgb') {
+            word = convert.rgb.hex(args);
+        } else {
+            let rgba, hsla;
+            // alpha convertion
+            if (word === 'rgba') {
+                rgba = args;
+                hsla = convert.rgb.hsl(args);
+                hsla[0] = round(hsla[0]);
+                hsla[1] = round(hsla[1]);
+                hsla[2] = round(hsla[2]);
+                hsla.push(args[3]);
+            } else {
+                hsla = args;
+                rgba = convert.hsl.rgb(args);
+                rgba[0] = round(rgba[0]);
+                rgba[1] = round(rgba[1]);
+                rgba[2] = round(rgba[2]);
+                rgba.push(args[3]);
+            }
+            hsla[1] = hsla[1] + '%';
+            hsla[2] = hsla[2] + '%';
+            return shorter('hsla(' + hsla.join() + ')', 'rgba(' + rgba.join() + ')');
+        }
+    } else if (word[0] === '#' && word.length === 4) {
+        word = toLonghand(word);
     }
-    if (ctype.isHex(colour)) {
-        colour = toShorthand(colour.toLowerCase());
-        let keyword = filterColor(key => colourNames[key] === colour)[0];
-        return shorter(keyword, colour);
-    } else if (ctype.isKeyword(colour)) {
-        let hex = colourNames[filterColor(k => k === colour.toLowerCase())[0]];
-        return shorter(hex, colour);
+
+    if (word in hexes) {
+        word = shorter(toShorthand(word), hexes[word]);
+    } else if (word in keywords) {
+        word = shorter(word, toShorthand(keywords[word]));
+    } else if (word[0] === '#' && word.length === 7) {
+        word = toShorthand(word);
+    } else {
+        return name;
     }
-    // Possibly malformed, just pass through
-    return colour;
+
+    return word;
 };
