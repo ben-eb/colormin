@@ -7,9 +7,7 @@ import {is as isHex, toShorthand, toLonghand} from './lib/hex';
 let hexes = {};
 let round = Math.round;
 
-Object.keys(keywords).forEach(function (keyword) {
-    hexes[keywords[keyword]] = keyword;
-});
+Object.keys(keywords).forEach(keyword => hexes[keywords[keyword]] = keyword);
 
 let shorter = (a, b) => (a && a.length < b.length ? a : b);
 
@@ -29,7 +27,7 @@ export default function (name, args) {
         }
         if (word === 'rgba' || word === 'hsla') {
             if (args[3] === 0) {
-                return'transparent';
+                return 'transparent';
             } else if (args[3] === 1) {
                 word = word.slice(0, 3);
             } else {
@@ -47,7 +45,7 @@ export default function (name, args) {
             word = convert.rgb.hex(args);
         } else {
             let rgba, hsla;
-            // alpha convertion
+            // alpha conversion
             if (word === 'rgba') {
                 rgba = args;
                 hsla = convert.rgb.hsl(args);
@@ -65,7 +63,7 @@ export default function (name, args) {
             }
             hsla[1] = hsla[1] + '%';
             hsla[2] = hsla[2] + '%';
-            return shorter('hsla(' + hsla.join() + ')', 'rgba(' + rgba.join() + ')');
+            return shorter(`hsla(${hsla.join()})`, `rgba(${rgba.join()})`);
         }
     }
 
