@@ -1,5 +1,3 @@
-'use strict';
-
 import colours from 'css-color-names';
 import toShorthand from './toShorthand';
 

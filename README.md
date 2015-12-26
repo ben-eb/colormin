@@ -10,6 +10,7 @@ With [npm](https://npmjs.org/package/colormin) do:
 npm install colormin --save
 ```
 
+
 ## Example
 
 ```js
@@ -20,13 +21,15 @@ console.log(colormin('rgba(255, 0, 0, 1)'));
 ```
 
 colormin works for rgb, rgba, hsl, hsla, hex & css color keywords. See more
-example output in the [tests](test.js). Note that colormin does not convert
-invalid CSS colors; it is not a color validator itself.
+example output in the [tests](src/__tests__/index.js). Note that colormin does
+not convert invalid CSS colors, as it is not a color validator.
+
 
 ## Contributing
 
 Pull requests are welcome. If you add functionality, then please add unit tests
 to cover it.
+
 
 ## License
 

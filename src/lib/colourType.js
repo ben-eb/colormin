@@ -1,5 +1,3 @@
-'use strict';
-
 import colourNames from './colourNames';
 import toLonghand from './toLonghand';
 

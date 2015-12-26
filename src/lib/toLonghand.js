@@ -1,9 +1,10 @@
-'use strict';
-
 export default hex => {
-    let h = hex.substring(1);
-    let r = h[0];
-    let g = h[1];
-    let b = h[2];
-    return h.length === 3 && '#' + r + r + g + g + b + b || hex;
+    if (hex.length !== 4) {
+        return hex;
+    }
+
+    let r = hex[1];
+    let g = hex[2];
+    let b = hex[3];
+    return '#' + r + r + g + g + b + b;
 };

@@ -1,5 +1,3 @@
-'use strict';
-
 import colourNames from './lib/colourNames';
 import toShorthand from './lib/toShorthand';
 import * as ctype from './lib/colourType';
