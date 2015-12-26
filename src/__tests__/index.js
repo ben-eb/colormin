@@ -32,6 +32,7 @@ test('should return the smallest colour', t => {
     t.same(min('rgb(100%,100%,100%)'), '#fff', 'should convert percentage based rgba values (3)');
     t.same(min('rgba(100%,100%,100%,0.5)'), 'hsla(0,0%,100%,.5)', 'should convert percentage based rgba values (4)');
     t.same(min('rgba(100%,64.7%,0%,.5)'), 'rgba(255,165,0,.5)', 'should convert percentage based rgba values (5)');
+    t.same(min('rgb(50%,23,54)'), 'rgb(50%,23,54)', 'should pass through on invalid rgb functions');
 });
 
 test('should pass through if not recognised', t => {

@@ -10,7 +10,13 @@ let shorter = (a, b) => (a && a.length < b.length ? a : b).toLowerCase();
 
 export default colour => {
     if (ctype.isRGBorHSL(colour)) {
-        let c = color(colour);
+        let c;
+        // Pass through invalid rgb/hsl functions
+        try {
+            c = color(colour);
+        } catch (err) {
+            return colour;
+        }
         if (c.alpha() === 1) {
             // At full alpha, just use hex
             colour = c.hexString();
