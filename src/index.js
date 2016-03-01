@@ -8,7 +8,7 @@ import zero from './lib/trimLeadingZero';
 let filterColor = callback => Object.keys(colourNames).filter(callback);
 let shorter = (a, b) => (a && a.length < b.length ? a : b).toLowerCase();
 
-export default colour => {
+export default (colour, opts = {}) => {
     if (ctype.isRGBorHSL(colour)) {
         let c;
         // Pass through invalid rgb/hsl functions
@@ -22,7 +22,13 @@ export default colour => {
             colour = c.hexString();
         } else {
             let rgb = c.rgb();
-            if (!rgb.r && !rgb.g && !rgb.b && !rgb.a) {
+            if (
+                !opts.legacy &&
+                !rgb.r &&
+                !rgb.g &&
+                !rgb.b &&
+                !rgb.a
+            ) {
                 return 'transparent';
             }
             let hsla = c.hslaString();

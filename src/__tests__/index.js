@@ -18,6 +18,7 @@ test('should return the smallest colour', t => {
     t.same(min('#000080'), 'navy', 'should convert another longhand hex to keyword');
     t.same(min('rgba(199, 190, 179, 0.8)'), 'hsla(33,15%,74%,.8)', 'should convert rgba to hsla when shorter');
     t.same(min('rgba(0,0,0,0)'), 'transparent', 'should convert this specific rgba value to "transparent"');
+    t.same(min('rgba(0,0,0,0)', {legacy: true}), 'rgba(0,0,0,0)', 'should not convert this specific rgba value to "transparent" (legacy mode)');
     t.same(min('hsla(0,0%,0%,0)'), 'transparent', 'should convert this specific hsla value to "transparent"');
     t.same(min('hsla(200,0%,0%,0)'), 'transparent', 'should convert hsla values with 0 saturation & 0 lightness to "transparent"');
     t.same(min('transparent'), 'transparent', 'should leave transparent as it is');
