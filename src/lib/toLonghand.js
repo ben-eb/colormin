@@ -3,8 +3,8 @@ export default hex => {
         return hex;
     }
 
-    let r = hex[1];
-    let g = hex[2];
-    let b = hex[3];
+    const r = hex[1];
+    const g = hex[2];
+    const b = hex[3];
     return '#' + r + r + g + g + b + b;
 };

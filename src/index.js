@@ -1,12 +1,12 @@
+import color from 'color';
 import colourNames from './lib/colourNames';
 import toShorthand from './lib/toShorthand';
 import * as ctype from './lib/colourType';
-import color from 'color';
 import trim from './lib/stripWhitespace';
 import zero from './lib/trimLeadingZero';
 
-let filterColor = callback => Object.keys(colourNames).filter(callback);
-let shorter = (a, b) => (a && a.length < b.length ? a : b).toLowerCase();
+const filterColor = callback => Object.keys(colourNames).filter(callback);
+const shorter = (a, b) => (a && a.length < b.length ? a : b).toLowerCase();
 
 export default (colour, opts = {}) => {
     if (ctype.isRGBorHSL(colour)) {

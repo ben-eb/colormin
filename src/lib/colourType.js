@@ -1,7 +1,7 @@
 import colourNames from './colourNames';
 import toLonghand from './toLonghand';
 
-export let isHex = colour => {
+export const isHex = colour => {
     if (colour[0] === '#') {
         let c = toLonghand(colour).substring(1);
         return c.length === 6 && ! isNaN(parseInt(c, 16));
@@ -9,8 +9,8 @@ export let isHex = colour => {
     return false;
 };
 
-export let isRGBorHSL = colour => /^(rgb|hsl)a?\(.*?\)/.test(colour);
+export const isRGBorHSL = colour => /^(rgb|hsl)a?\(.*?\)/.test(colour);
 
-export let isKeyword = colour => {
+export const isKeyword = colour => {
     return ~Object.keys(colourNames).indexOf(colour.toLowerCase());
 };
