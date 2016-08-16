@@ -1,6 +1,7 @@
-import has from 'has';
 import colourNames from './colourNames';
 import toLonghand from './toLonghand';
+
+const has = Object.prototype.hasOwnProperty;
 
 export const isHex = colour => {
     if (colour[0] === '#') {
@@ -12,4 +13,4 @@ export const isHex = colour => {
 
 export const isRGBorHSL = colour => /^(rgb|hsl)a?\(.*?\)/.test(colour);
 
-export const isKeyword = colour => has(colourNames, colour.toLowerCase());
+export const isKeyword = colour => has.call(colourNames, colour.toLowerCase());
