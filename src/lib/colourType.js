@@ -12,5 +12,5 @@ export const isHex = colour => {
 export const isRGBorHSL = colour => /^(rgb|hsl)a?\(.*?\)/.test(colour);
 
 export const isKeyword = colour => {
-    return ~Object.keys(colourNames).indexOf(colour.toLowerCase());
+    return colour.toLowerCase() in colourNames;
 };
