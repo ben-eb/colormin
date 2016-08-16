@@ -1,3 +1,4 @@
+import has from 'has';
 import colourNames from './colourNames';
 import toLonghand from './toLonghand';
 
@@ -11,6 +12,4 @@ export const isHex = colour => {
 
 export const isRGBorHSL = colour => /^(rgb|hsl)a?\(.*?\)/.test(colour);
 
-export const isKeyword = colour => {
-    return ~Object.keys(colourNames).indexOf(colour.toLowerCase());
-};
+export const isKeyword = colour => has(colourNames, colour.toLowerCase());
